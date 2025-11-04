@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Neighborhood Helper</title>
+  <title>Nachbarhilfe / Neighborhood Helper</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -23,6 +23,7 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       max-width: 400px;
       width: 90%;
+      position: relative;
     }
     h1 {
       font-size: 24px;
@@ -54,23 +55,91 @@
     a.button:hover {
       background-color: #128C7E;
     }
+    .lang-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    .lang-btn img {
+      width: 28px;
+      height: 18px;
+      border-radius: 3px;
+      transition: transform 0.2s;
+    }
+    .lang-content {
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+    .hidden {
+      opacity: 0;
+      display: none;
+    }
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>Neighborhood Helper</h1>
-    <p>Location: Niederwaldstraße, Stuttgart</p>
+    <!-- Language button -->
+    <button class="lang-btn" onclick="toggleLanguage()">
+      <img src="https://flagcdn.com/w20/de.png" alt="DE" id="lang-icon">
+    </button>
 
-    <div class="section-title">How We Help</div>
-    <p>Busy or can’t go shopping? Send your grocery or baby product requests via WhatsApp.</p>
-    <p>We’ll pick them up on our next shopping trip and deliver them right to your doorstep.</p>
-    
-    <div class="section-title">Why Join</div>
-    <p>✅ Quick and convenient – we shop while doing our errands</p>
-    <p>✅ Trusted neighborhood service – safe and reliable</p>
-    <p>✅ Small requests welcome – anything you need from local stores</p>
+    <!-- German content -->
+    <div class="lang-content" id="de">
+      <h1>Nachbarhilfe</h1>
+      <p>Ort: Niederwaldstraße, Stuttgart</p>
 
-    <a class="button" href="https://wa.me/" target="_blank">Send a Request on WhatsApp</a>
+      <div class="section-title">Wie wir helfen</div>
+      <p>Keine Zeit zum Einkaufen? Senden Sie Ihre Einkaufswünsche für Lebensmittel oder Babyprodukte per WhatsApp.</p>
+      <p>Wir bringen sie bei unserem nächsten Einkauf direkt zu Ihnen nach Hause.</p>
+
+      <div class="section-title">Warum teilnehmen</div>
+      <p>✅ Schnell und bequem – wir erledigen die Einkäufe während unserer eigenen Wege</p>
+      <p>✅ Vertrauenswürdiger Nachbarschaftsservice – sicher und zuverlässig</p>
+      <p>✅ Kleine Wünsche willkommen – alles aus lokalen Geschäften</p>
+
+      <a class="button" href="https://wa.me/491736467267" target="_blank">Wunsch per WhatsApp senden</a>
+    </div>
+
+    <!-- English content -->
+    <div class="lang-content hidden" id="en">
+      <h1>Neighborhood Helper</h1>
+      <p>Location: Niederwaldstraße, Stuttgart</p>
+
+      <div class="section-title">How We Help</div>
+      <p>No time to shop? Send your grocery or baby product requests via WhatsApp.</p>
+      <p>We’ll bring them to your doorstep during our next shopping trip.</p>
+
+      <div class="section-title">Why Join</div>
+      <p>✅ Quick and convenient – we shop while doing our errands</p>
+      <p>✅ Trusted neighborhood service – safe and reliable</p>
+      <p>✅ Small requests welcome – anything you need from local stores</p>
+
+      <a class="button" href="https://wa.me/491736467267" target="_blank">Send a Request on WhatsApp</a>
+    </div>
   </div>
+
+  <script>
+    let currentLang = "de";
+    function toggleLanguage() {
+      const de = document.getElementById("de");
+      const en = document.getElementById("en");
+      const icon = document.getElementById("lang-icon");
+
+      if (currentLang === "de") {
+        de.classList.add("hidden");
+        setTimeout(() => { en.classList.remove("hidden"); }, 300);
+        icon.src = "https://flagcdn.com/w20/gb.png"; // English flag
+        currentLang = "en";
+      } else {
+        en.classList.add("hidden");
+        setTimeout(() => { de.classList.remove("hidden"); }, 300);
+        icon.src = "https://flagcdn.com/w20/de.png"; // German flag
+        currentLang = "de";
+      }
+    }
+  </script>
 </body>
 </html>
