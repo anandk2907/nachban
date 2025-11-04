@@ -47,7 +47,7 @@
       padding: 14px 25px;
       font-size: 16px;
       color: #fff;
-      background-color: #25D366; /* WhatsApp green */
+      background-color: #25D366;
       text-decoration: none;
       border-radius: 8px;
       transition: background-color 0.2s;
@@ -55,20 +55,32 @@
     a.button:hover {
       background-color: #128C7E;
     }
+
+    /* Language toggle button */
     .lang-btn {
-      position: absolute;
+      position: fixed;
       top: 15px;
       right: 15px;
-      background: transparent;
+      background: #007bff;
       border: none;
       cursor: pointer;
+      border-radius: 5px;
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      z-index: 1000;
+      transition: background 0.2s;
+    }
+    .lang-btn:hover {
+      background: #0056b3;
     }
     .lang-btn img {
-      width: 28px;
-      height: 18px;
+      width: 32px;
+      height: 22px;
       border-radius: 3px;
-      transition: transform 0.2s;
+      margin-left: 5px;
     }
+
     .lang-content {
       opacity: 1;
       transition: opacity 0.3s ease;
@@ -80,16 +92,17 @@
   </style>
 </head>
 <body>
-  <div class="card">
-    <!-- Language button -->
-    <button class="lang-btn" onclick="toggleLanguage()">
-      <img src="https://flagcdn.com/w20/gb.png" alt="EN" id="lang-icon">
-    </button>
+  <!-- Language button -->
+  <button class="lang-btn" onclick="toggleLanguage()">
+    <span id="lang-label">EN</span>
+    <img src="https://flagcdn.com/w20/gb.png" alt="EN" id="lang-icon">
+  </button>
 
+  <div class="card">
     <!-- German content -->
     <div class="lang-content" id="de">
       <h1>Nachbarhilfe</h1>
-      <p>Ort: Niederwaldstraße, Stuttgart</p>
+      <p>Ort: NiederwaldStr, Stuttgart</p>
 
       <div class="section-title">Wie wir helfen</div>
       <p>Keine Zeit zum Einkaufen? Senden Sie Ihre Einkaufswünsche für Lebensmittel oder Babyprodukte per WhatsApp.</p>
@@ -106,7 +119,7 @@
     <!-- English content -->
     <div class="lang-content hidden" id="en">
       <h1>Neighborhood Helper</h1>
-      <p>Location: Niederwaldstraße, Stuttgart</p>
+      <p>Location: NiederwaldStr, Stuttgart</p>
 
       <div class="section-title">How We Help</div>
       <p>No time to shop? Send your grocery or baby product requests via WhatsApp.</p>
@@ -127,16 +140,19 @@
       const de = document.getElementById("de");
       const en = document.getElementById("en");
       const icon = document.getElementById("lang-icon");
+      const label = document.getElementById("lang-label");
 
       if (currentLang === "de") {
         de.classList.add("hidden");
         setTimeout(() => { en.classList.remove("hidden"); }, 300);
-        icon.src = "https://flagcdn.com/w20/gb.png"; // English flag
+        icon.src = "https://flagcdn.com/w20/de.png"; // German flag to switch back
+        label.innerText = "DE";
         currentLang = "en";
       } else {
         en.classList.add("hidden");
         setTimeout(() => { de.classList.remove("hidden"); }, 300);
-        icon.src = "https://flagcdn.com/w20/de.png"; // German flag
+        icon.src = "https://flagcdn.com/w20/gb.png"; // English flag to switch back
+        label.innerText = "EN";
         currentLang = "de";
       }
     }
